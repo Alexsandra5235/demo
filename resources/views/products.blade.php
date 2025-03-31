@@ -5,32 +5,14 @@
 @extends($template)
 
 @section('title')
-    Главная страница
+    Просмотр товаров пользователя
 @endsection
 
 @section('main_content')
 
-    @if ($users->isNotEmpty())
-        <div class="container">
-            <form action="/search" method="get">
-                <div class="input-group">
-                    <select name="user" id="user" class="form-control">
-                        @foreach($users as $item)
-                            <option @if (request('user') == $item->id) selected @endif
-                            value="{{$item->id}}">{{$item->name}}</option>
-                        @endforeach
-                    </select>
-                    <input type="submit" class="btn btn-primary" value="Поиск по продавцу">
-                    <a href="/products" class="btn btn-secondary">Отчистить поиск</a>
-                </div>
-            </form>
-        </div>
-    @endif
-
-
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
-
+            <h3>Товары пользователя: <strong>{{$profile->name}}</strong></h3>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 @if ($products->isEmpty())
                     <h3>Пока что здесь нет товаров!</h3>

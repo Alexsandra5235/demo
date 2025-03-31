@@ -31,12 +31,12 @@
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
             <div class="dropdown py-1">
                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('storage/' . $user_share->avatar->avatar_path) }}" alt="avatar"
+                    <img src="{{ asset('storage/' . $user->avatar->avatar_path) }}" alt="avatar"
                          class="rounded-circle img-fluid me-2" width="32px" height="32px">
-                   {{$user_share->name}}
+                   {{$user->name}}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                    <li><a class="dropdown-item" href="/profile/{{$user_share->id}}">Мой профиль</a></li>
+                    <li><a class="dropdown-item" href="/profile/{{$user->id}}">Мой профиль</a></li>
                     <li><a class="dropdown-item" href="/product/add">Добавить объявление</a></li>
                     <li><a class="dropdown-item" href="/logout">Выйти</a></li>
                 </ul>

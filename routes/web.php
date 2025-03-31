@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(UserMiddleware::class)->group(function () {
 
-Route::get('/logout', [ProfileController::class, 'logout'])->name('logout');
-Route::get('/sign',[ProfileController::class,'sign'])->name('sign');
-Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::post('/sign',[ProfileController::class,'login'])->name('login');
-Route::get('/register', [ProfileController::class,'register'])->name('register');
-Route::post('/register',[ProfileController::class,'store'])->name('store.register');
+    Route::get('/logout', [ProfileController::class, 'logout'])->name('logout');
+    Route::get('/sign',[ProfileController::class,'sign'])->name('sign');
+    Route::get('/', [HomeController::class, 'home'])->name('home');
+    Route::post('/sign',[ProfileController::class,'login'])->name('login');
+    Route::get('/register', [ProfileController::class,'register'])->name('register');
+    Route::post('/register',[ProfileController::class,'store'])->name('store.register');
+    Route::get('/profile/{id}/info',[ProfileController::class,'info'])->name('info');
+    Route::get('/profile/{id}/products',[ProfileController::class,'showProducts'])->name('product.show');
 
 });
 

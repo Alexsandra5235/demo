@@ -133,4 +133,17 @@ class ProfileController extends Controller
 
 
     }
+    public function info($id) : object
+    {
+        return view('infoProfile')
+            ->with('profile', Profile::all()->find($id));
+    }
+
+    public function showProducts($id) : object
+    {
+        $products = Product::query()->where('profile_id', $id)->get();
+        $profile = Profile::query()->find($id);
+
+        return view('products', ['products' => $products, 'profile' => $profile]);
+    }
 }
