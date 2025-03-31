@@ -6,28 +6,30 @@
 
 @section('main_content')
 
-    <div class="container">
-        <form action="/search" method="get">
-            <div class="input-group">
-                <select name="user" id="user" class="form-control">
-                    @foreach($users as $item)
-                        <option @if (request('user') == $item->id) selected @endif
-                        value="{{$item->id}}">{{$item->name}}</option>
-                    @endforeach
-                </select>
-                <input type="submit" class="btn btn-primary" value="Поиск по продавцу">
-                <a href="/products" class="btn btn-secondary">Отчистить поиск</a>
+    @if ($users->isNotEmpty())
+        <div class="container">
+            <form action="/search" method="get">
+                <div class="input-group">
+                    <select name="user" id="user" class="form-control">
+                        @foreach($users as $item)
+                            <option @if (request('user') == $item->id) selected @endif
+                            value="{{$item->id}}">{{$item->name}}</option>
+                        @endforeach
+                    </select>
+                    <input type="submit" class="btn btn-primary" value="Поиск по продавцу">
+                    <a href="/products" class="btn btn-secondary">Отчистить поиск</a>
+                </div>
+            </form>
+        </div>
+    @endif
 
-            </div>
-        </form>
-    </div>
 
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 @if ($products->isEmpty())
-                    <h3>У данного пользователя пока что нет товаров!</h3>
+                    <h3>Пока что здесь нет товаров!</h3>
                 @else
                     @foreach($products as $item)
                         <div class="col">
