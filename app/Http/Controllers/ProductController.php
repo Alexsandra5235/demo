@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -62,6 +63,25 @@ class ProductController extends Controller
         $product->description = $request->input("description");
         $product->price = $request->input("price");
         $product->save();
+        return redirect('/profile/' . Session::get('user')->id);
+    }
+    public function delete(int $id) : object{
+        $product = Product::all()->findOrFail($id);
+
+        if (!$product)  return redirect('/products');
+
+        $imagePath = $product->photos;
+
+        if ($imagePath != null) {
+            foreach ($imagePath as $photo) {
+                if (Storage::disk('public')->exists($photo->path)) {
+                    Storage::disk('public')->delete($photo->path);
+                }
+            }
+        }
+
+        $product->delete();
+
         return redirect('/profile/' . Session::get('user')->id);
     }
 }
