@@ -54,8 +54,8 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{$item->title}}</h5>
                                     <p class="card-text">{{$item->price}} рублей</p>
-                                    <p class="card-text">{{$item->city}}</p>
-                                    <p class="card-text">{{$item->user->name}}</p>
+                                    <p class="card-text">{{$item->description}}</p>
+                                    <p class="card-text">{{$item->profile->name}}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group d-flex">
                                             <form action="/product/{{$item->id}}/delete" method="post">

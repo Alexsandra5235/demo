@@ -57,7 +57,7 @@ class ProfileController extends Controller
         $user->save();
 
         Avatar::query()->create([
-            'avatar_path' => $randomAvatar,
+            'avatar_path' => 'user/avatar-default.png',
             'profile_id'=> $user->id,
         ]);
 

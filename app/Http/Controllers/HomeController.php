@@ -10,8 +10,9 @@ class HomeController extends Controller
 {
     public function home() : object
     {
+        $products = Product::with('profile')->get();
         return view('home')
-            ->with('products', Product::all())
+            ->with('products', $products)
             ->with('users', Profile::all());
     }
 }

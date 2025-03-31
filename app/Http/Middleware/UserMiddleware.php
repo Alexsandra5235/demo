@@ -19,7 +19,7 @@ class UserMiddleware
         if (Session::has('user')) {
             $user = Session::get('user');
 
-            view()->share('user', $user);
+            view()->share('user_share', $user);
         }
         return $next($request);
     }
