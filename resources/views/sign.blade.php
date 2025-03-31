@@ -14,17 +14,18 @@
                 </div>
                 <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                     <h3>Вход</h3>
-                    <form>
+                    <form action="/sign" method="post">
+                        @csrf
                         <!-- Email input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <input type="email" id="form1Example13" class="form-control form-control-lg" />
-                            <label class="form-label" for="form1Example13">Почта</label>
+                            <input type="email" id="email" name="email" class="form-control form-control-lg" />
+                            <label class="form-label" for="email">Почта</label>
                         </div>
 
                         <!-- Password input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <input type="password" id="form1Example23" class="form-control form-control-lg" />
-                            <label class="form-label" for="form1Example23">Пароль</label>
+                            <input type="password" id="password" name="password" class="form-control form-control-lg" />
+                            <label class="form-label" for="password">Пароль</label>
                         </div>
 
                         <div class="d-flex justify-content-around align-items-center mb-4">

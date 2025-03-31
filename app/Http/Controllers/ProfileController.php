@@ -71,14 +71,14 @@ class ProfileController extends Controller
             'password' => 'required',
         ]);
 
-        $user = Profile::where('email', $request->email)->first();
+        $user = Profile::query()->where('email', $request->email)->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
             Session::put('user', $user);
-            return redirect('/'); // или страница, куда перенаправлять после входа
+            return redirect('/');
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials.']);
+        return redirect('/sign')->withErrors(['email' => 'Invalid credentials.']);
     }
 
     public function logout() : object
