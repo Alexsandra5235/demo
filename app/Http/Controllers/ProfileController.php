@@ -40,17 +40,6 @@ class ProfileController extends Controller
             'phone' => 'required',
         ]);
 
-        $avatars = [
-            'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp',
-            'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp',
-            'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp',
-            'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp',
-            'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp',
-            'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp',
-        ];
-
-        $randomAvatar = $avatars[array_rand($avatars)];
-
         $user = new Profile();
         $user->name = $request->input("name");
         $user->email = $request->input("email");

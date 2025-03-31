@@ -46,4 +46,22 @@ class ProductController extends Controller
 
         return redirect('/profile/' . Session::get('user')->id);
     }
+
+    public function edit(int $id) : object{
+        return view('editProduct', ['product' => Product::query()->find($id)]);
+    }
+    public function update(Request $request, int $id) : object{
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+        ]);
+
+        $product = Product::query()->find($id);
+        $product->title = $request->input("title");
+        $product->description = $request->input("description");
+        $product->price = $request->input("price");
+        $product->save();
+        return redirect('/profile/' . Session::get('user')->id);
+    }
 }
