@@ -16,7 +16,9 @@ class ProfileController extends Controller
     public function profile($id) : object
     {
         $profile = Profile::all()->find($id);
-        return view('profile')->with('profile', $profile);
+        return view('profile')
+            ->with('profile', $profile)
+            ->with('products', Product::query()->where('profile_id', $id)->get());
     }
 
     public function register() : object{
