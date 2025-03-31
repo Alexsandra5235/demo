@@ -113,12 +113,18 @@
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col d-flex justify-content-end">
+                                                            <div class="col d-flex justify-content-end mb-3">
                                                                 <button class="btn btn-primary" type="submit">Сохранить изменения</button>
                                                             </div>
                                                         </div>
                                                     </form>
-
+                                                    <div class="col d-flex justify-content-end">
+                                                        <form action="/profile/{{$profile->id}}/delete" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button class="btn btn-danger" type="submit">Удалить аккаунт</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

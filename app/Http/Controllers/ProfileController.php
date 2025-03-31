@@ -10,6 +10,7 @@ use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -136,5 +137,29 @@ class ProfileController extends Controller
         $profile = Profile::query()->find($id);
 
         return view('products', ['products' => $products, 'profile' => $profile]);
+    }
+
+    public function delete($id) : object
+    {
+        $profile = Profile::query()->find($id);
+
+        $imagePath = $profile->avatar()->first()->avatar_path;
+
+        if ($imagePath != null) {
+
+            if (Storage::disk('public')->exists($imagePath)) {
+                Storage::disk('public')->delete($imagePath);
+            }
+
+        }
+
+        $profile->delete();
+
+        Session::forget('user');
+
+        $products = Product::with('profile')->get();
+        return redirect('/')
+            ->with('products', $products)
+            ->with('users', Profile::all());
     }
 }

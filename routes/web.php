@@ -19,6 +19,7 @@ Route::middleware(UserMiddleware::class)->group(function () {
     Route::post('/register',[ProfileController::class,'store'])->name('store.register');
     Route::get('/profile/{id}/info',[ProfileController::class,'info'])->name('info');
     Route::get('/profile/{id}/products',[ProfileController::class,'showProducts'])->name('product.show');
+    Route::get('/search',[HomeController::class,'search'])->name('search');
 
 });
 
@@ -32,6 +33,7 @@ Route::middleware(AuthMiddleware::class)->group(function () {
     Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
     Route::put('/product/{id}/edit', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/product/{id}/delete', [ProductController::class, 'delete'])->name('product.delete');
+    Route::delete('/profile/{id}/delete', [ProfileController::class, 'delete'])->name('profile.delete');
 
 });
 
