@@ -24,7 +24,6 @@
                                         <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                                             <div class="text-center text-sm-left mb-2 mb-sm-0">
                                                 <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{$profile->name}}</h4>
-                                                <p class="mb-0">@johnny.s</p>
                                                 <div class="mt-2">
                                                     <button class="btn btn-primary" type="button">
                                                         <i class="fa fa-fw fa-camera"></i>
@@ -93,7 +92,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col d-flex justify-content-end">
-                                                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                                                        <button class="btn btn-primary" type="submit">Сохранить изменения</button>
                                                     </div>
                                                 </div>
                                             </form>
