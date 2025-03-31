@@ -60,9 +60,7 @@ class ProfileController extends Controller
             'profile_id'=> $user->id,
         ]);
 
-        return redirect('/')
-            ->with('products', Product::all())
-            ->with('users', Profile::all());
+        return redirect('/sign');
     }
 
     public function login(Request $request) : object{
