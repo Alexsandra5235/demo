@@ -29,18 +29,18 @@
         </a>
 
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                        <div class="dropdown py-1">
-                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{$user->avatar->avatar_path}}" alt="avatar"
-                                     class="rounded-circle img-fluid" width="32px" height="32px">
-                               Профиль
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                                <li><a class="dropdown-item" href="/profile/{{$user->id}}">Мой профиль</a></li>
-                                <li><a class="dropdown-item" href="/profile">Добавить объявление</a></li>
-                                <li><a class="dropdown-item" href="/profile">Выйти</a></li>
-                            </ul>
-                        </div>
+            <div class="dropdown py-1">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="{{$user->avatar->avatar_path}}" alt="avatar"
+                         class="rounded-circle img-fluid me-2" width="32px" height="32px">
+                   {{$user->name}}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                    <li><a class="dropdown-item" href="/profile/{{$user->id}}">Мой профиль</a></li>
+                    <li><a class="dropdown-item" href="/profile">Добавить объявление</a></li>
+                    <li><a class="dropdown-item" href="/logout">Выйти</a></li>
+                </ul>
+            </div>
         </nav>
     </div>
 </div>

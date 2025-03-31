@@ -82,6 +82,32 @@ class ProfileController extends Controller
     public function logout() : object
     {
         Session::forget('user');
-        return redirect('/login');
+        return redirect('/');
+    }
+
+    public function edit(Request $request,$id) : object{
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'current_passwd' => 'required',
+            'repeat_passwd' => 'required',
+            'phone' => 'required',
+        ]);
+
+        $user = Profile::all()->find($id);
+
+        if(Hash::check($request->current_passwd, $user->password)
+            && $request->input("password") == $request->input('repeat_passwd')){
+
+            $user->name = $request->input("name");
+            $user->email = $request->input("email");
+            $user->password = Hash::make($request->input("password"));
+            $user->phone = $request->input("phone");
+            $user->save();
+        }
+
+        return redirect('/profile/'.$id);
+
     }
 }

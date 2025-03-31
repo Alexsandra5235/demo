@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,11 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-//        $user = Auth::user();
-//
-//        View::composer('*', function($view) use ($user) {
-//            $view->with('user', $user);
-//        });
-
+//        if (Session::has('user')){
+//            View::share('user', Session::get('user'));
+//        }
     }
 }
