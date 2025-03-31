@@ -20,7 +20,7 @@
                                     <div class="row">
                                         <div class="col-12 col-sm-auto mb-3">
                                             <div class="mx-auto" style="width: 140px;">
-                                                <img src="{{$profile->avatar->avatar_path}}" alt="avatar"
+                                                <img src="{{ asset('storage/' . $profile->avatar->avatar_path) }}" alt="avatar"
                                                      class="rounded-circle img-fluid" width="150px" height="150px">
                                             </div>
                                         </div>
@@ -28,10 +28,38 @@
                                             <div class="text-center text-sm-left mb-2 mb-sm-0">
                                                 <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{$profile->name}}</h4>
                                                 <div class="mt-2">
-                                                    <button class="btn btn-primary" type="button">
-                                                        <i class="fa fa-fw fa-camera"></i>
-                                                        <span>Изменить фотографию</span>
-                                                    </button>
+                                                    <div class="bd-example input-group mt-2" style="width: 100%">
+                                                        <a href="#" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable">
+                                                            <i class="fa fa-fw fa-camera"></i>
+                                                            <span>Изменить фотографию</span>
+                                                        </a>
+                                                    </div>
+
+                                                    <!-- Вертикально центрированное модальное окно -->
+                                                    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: none;" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalScrollableTitle">Обновление фотографии профиля</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                                                                </div>
+                                                                <form action="/profile/{{$profile->id}}/edit/avatar" method="post" enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    @method('put')
+                                                                    <div class="modal-body">
+                                                                        <div data-mdb-input-init class="form-outline mb-4">
+                                                                            <label for="images" class="form-label">Выберите фотографии профиля:</label>
+                                                                            <input class="form-control" type="file" name="images" id="images" multiple />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                                                        <input type="submit" class="btn btn-primary" value="Сохранить изменения">
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="text-center text-sm-right">

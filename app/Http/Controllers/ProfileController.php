@@ -6,6 +6,7 @@ use App\Models\Avatar;
 use App\Models\Product;
 use App\Models\Profile;
 use App\Models\Users;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -108,6 +109,28 @@ class ProfileController extends Controller
         }
 
         return redirect('/profile/'.$id);
+
+    }
+
+    public function editAvatar(Request $request, $id) : object
+    {
+        $request->validate([
+            'images' => 'required|max:2048',
+        ]);
+
+        $user = Profile::all()->find($id);
+
+        // Загружаем файл
+        $path = $request->file('images')->store('user', 'public');
+
+        // Если у пользователя уже есть аватар, обновляем его, иначе создаем новый
+        $user->avatar()->updateOrCreate(
+            [],
+            ['avatar_path' => $path]
+        );
+
+        return redirect()->back();
+
 
     }
 }
