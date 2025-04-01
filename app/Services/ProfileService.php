@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\Profile;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+
+class ProfileService
+{
+    public function validate($request) : void
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'phone' => 'required',
+        ]);
+    }
+
+    public function create($request) : Profile
+    {
+        return Profile::query()->create([
+            'name' => $request->input("name"),
+            'email' => $request->input("email"),
+            'password' => Hash::make($request->input("password")),
+            'phone' => $request->input("phone"),
+        ]);
+    }
+
+    public function validateLogin($request) : void
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+    }
+    public function validateUpdate($request) : void
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'current_passwd' => 'required',
+            'repeat_passwd' => 'required',
+            'phone' => 'required',
+        ]);
+    }
+
+    public function update(Request $request,Profile $user) : object
+    {
+        $user->name = $request->input("name");
+        $user->email = $request->input("email");
+        $user->password = Hash::make($request->input("password"));
+        $user->phone = $request->input("phone");
+        $user->save();
+    }
+
+}

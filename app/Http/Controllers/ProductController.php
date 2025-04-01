@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Photo;
 use App\Models\Product;
+use App\Services\PhotoService;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -11,6 +13,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    protected ProductService $productService;
+    protected PhotoService $photoService;
+    public function __construct(ProductService $productService, PhotoService $photoService){
+        $this->productService = $productService;
+        $this->photoService = $photoService;
+    }
     public function add() : object
     {
         return view('addProduct');
@@ -18,31 +26,12 @@ class ProductController extends Controller
 
     public function store(Request $request) : object
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-        ]);
+        $this->productService->validate($request);
 
         DB::transaction(function () use ($request) {
-            $product = Product::query()->create([
-                'title' => $request->input('title'),
-                'description' => $request->input('description'),
-                'price' => $request->input('price'),
-                'profile_id' => Session::get('user')->id
-            ]);
-
+            $product = $this->productService->create($request);
             // Обработка фотографий
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $photo) {
-                    $photoData = $photo->store('photos', 'public');
-
-                    Photo::query()->create([
-                        'path' => $photoData,
-                        'product_id' => $product->id,
-                    ]);
-                }
-            }
+            $this->photoService->create($request, $product);
         });
 
         return redirect('/profile/' . Session::get('user')->id);
@@ -52,33 +41,18 @@ class ProductController extends Controller
         return view('editProduct', ['product' => Product::query()->find($id)]);
     }
     public function update(Request $request, int $id) : object{
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-        ]);
+        $this->productService->validate($request);
+        $this->productService->update($request, $id);
 
-        $product = Product::query()->find($id);
-        $product->title = $request->input("title");
-        $product->description = $request->input("description");
-        $product->price = $request->input("price");
-        $product->save();
         return redirect('/profile/' . Session::get('user')->id);
     }
     public function delete(int $id) : object{
+
         $product = Product::all()->findOrFail($id);
 
         if (!$product)  return redirect('/products');
 
-        $imagePath = $product->photos;
-
-        if ($imagePath != null) {
-            foreach ($imagePath as $photo) {
-                if (Storage::disk('public')->exists($photo->path)) {
-                    Storage::disk('public')->delete($photo->path);
-                }
-            }
-        }
+        $this->photoService->delete($product);
 
         $product->delete();
 
