@@ -85,7 +85,7 @@ class ProfileController extends Controller
             $this->profileService->update($request, $user);
         }
 
-        return redirect('/profile/'.$id);
+        return redirect('/profile/'.$id)->with('user', $user);
 
     }
 
@@ -98,7 +98,7 @@ class ProfileController extends Controller
 
         $this->avatarService->update($user, $path);
 
-        return redirect()->back();
+        return redirect()->back()->with('user', $user);
 
 
     }

@@ -47,7 +47,7 @@ class ProfileService
         ]);
     }
 
-    public function update(Request $request,Profile $user) : object
+    public function update(Request $request,Profile $user) : void
     {
         $user->name = $request->input("name");
         $user->email = $request->input("email");
