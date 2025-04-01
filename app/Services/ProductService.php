@@ -19,9 +19,9 @@ class ProductService
         ]);
     }
 
-    public function validate(Request $request) : void
+    public function validate(Request $request) : array
     {
-        $request->validate([
+        return $request->validate([
             'title' => 'required',
             'description' => 'required',
             'price' => 'required',

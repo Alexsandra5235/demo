@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class ProfileService
 {
-    public function validate($request) : void
+    public function validate($request) : Request
     {
-        $request->validate([
+        return $request->validate([
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
@@ -28,16 +28,16 @@ class ProfileService
         ]);
     }
 
-    public function validateLogin($request) : void
+    public function validateLogin($request) : Request
     {
-        $request->validate([
+        return $request->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
     }
-    public function validateUpdate($request) : void
+    public function validateUpdate($request) : Request
     {
-        $request->validate([
+        return $request->validate([
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',

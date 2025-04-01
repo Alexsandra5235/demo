@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Storage;
 
 class AvatarService
 {
-    public function validate(Request $request) : void
+    public function validate(Request $request) : array
     {
-        $request->validate([
-            'images' => 'required|max:2048',
+        return $request->validate([
+            'images' => 'required',
         ]);
+
     }
     public function update(Profile $user, $path) : void
     {
