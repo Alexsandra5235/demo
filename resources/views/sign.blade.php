@@ -22,14 +22,22 @@
                         @csrf
                         <!-- Email input -->
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <input type="email" id="email" name="email" class="form-control form-control-lg" />
+                            @if ($errors->has('email'))
+                                <div class="text-danger">{{ $errors->first('email') }}</div>
+                            @endif
+                            <input type="text" id="email" name="email" class="form-control form-control-lg" value="{{ old('email') }}"/>
                             <label class="form-label" for="email">Почта</label>
+
                         </div>
 
                         <!-- Password input -->
                         <div data-mdb-input-init class="form-outline mb-4">
+                            @if ($errors->has('password'))
+                                <div class="text-danger">{{ $errors->first('password') }}</div>
+                            @endif
                             <input type="password" id="password" name="password" class="form-control form-control-lg" />
                             <label class="form-label" for="password">Пароль</label>
+
                         </div>
 
                         <div class="d-flex justify-content-around align-items-center mb-4">

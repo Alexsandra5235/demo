@@ -28,11 +28,11 @@ class ProfileService
         ]);
     }
 
-    public function validateLogin($request) : Request
+    public function validateLogin($request) : array
     {
         return $request->validate([
-            'email' => 'required',
-            'password' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:3',
         ]);
     }
     public function validateUpdate($request) : Request

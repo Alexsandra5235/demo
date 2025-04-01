@@ -64,7 +64,7 @@ class ProfileController extends Controller
             return redirect('/');
         }
 
-        return redirect('/sign')->withErrors(['email' => 'Invalid credentials.']);
+        return redirect('/sign');
     }
 
     public function logout() : object
