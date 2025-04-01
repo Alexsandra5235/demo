@@ -85,14 +85,23 @@
                                                         <div class="form-group">
                                                             <label for="name" class="form-label">Ваше имя</label>
                                                             <input class="form-control" type="text" name="name" id="name" value="{{$profile->name}}">
+                                                            @if ($errors->has('name'))
+                                                                <div class="text-danger">{{ $errors->first('name') }}</div>
+                                                            @endif
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="email" class="form-label">Ваша почта</label>
                                                             <input class="form-control" type="text" name="email" id="email" value="{{$profile->email}}">
+                                                            @if ($errors->has('email'))
+                                                                <div class="text-danger">{{ $errors->first('email') }}</div>
+                                                            @endif
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="phone" class="form-label">Ваш номер телефона</label>
                                                             <input class="form-control" type="text" name="phone" id="phone" value="{{$profile->phone}}">
+                                                            @if ($errors->has('phone'))
+                                                                <div class="text-danger">{{ $errors->first('phone') }}</div>
+                                                            @endif
                                                         </div>
 
                                                         <div class="row">
@@ -108,6 +117,9 @@
                                                                 <div class="form-group">
                                                                     <label for="password" class="form-label">Новый пароль</label>
                                                                     <input class="form-control" type="password" name="password" id="password">
+                                                                    @if ($errors->has('password'))
+                                                                        <div class="text-danger">{{ $errors->first('password') }}</div>
+                                                                    @endif
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="repeat_passwd" class="form-label">Повторите пароль</label>

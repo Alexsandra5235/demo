@@ -18,7 +18,7 @@ class CurrentPassword implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (!Auth::check() || !password_verify($value, Auth::user()->password)) {
+        if (!Session::has('user') || !Hash::check($value, Session::get('user')->password)) {
             $fail('Введённый пароль не совпадает с текущим паролем.');
         }
     }

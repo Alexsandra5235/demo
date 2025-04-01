@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ProfileService
 {
-    public function validate($request) : Request
+    public function validate($request) : array
     {
         return $request->validate([
             'name' => 'required',
@@ -44,7 +44,7 @@ class ProfileService
             'password' => 'required|min:3',
             'current_passwd' => ['required', new CurrentPassword],
             'repeat_passwd' => 'required|same:password',
-            'phone' => 'required',
+            'phone' => 'required|integer',
         ]);
     }
 
