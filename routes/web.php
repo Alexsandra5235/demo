@@ -25,9 +25,12 @@ Route::middleware(UserMiddleware::class)->group(function () {
 
 Route::middleware(AuthMiddleware::class)->group(function () {
 
-    Route::get('/profile/{id}', [ProfileController::class, 'profile'])->name('profile');
     Route::put('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile/{id}/edit/avatar', [ProfileController::class, 'editAvatar'])->name('profile.edit.avatar');
+    Route::middleware(UserMiddleware::class)->group(function () {
+        Route::put('/profile/{id}/edit/avatar', [ProfileController::class, 'editAvatar'])->name('profile.edit.avatar');
+        Route::get('/profile/{id}', [ProfileController::class, 'profile'])->name('profile');
+    });
+
     Route::get('/product/add', [ProductController::class, 'add'])->name('product.add');
     Route::post('/product/add', [ProductController::class, 'store'])->name('product.store');
     Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');

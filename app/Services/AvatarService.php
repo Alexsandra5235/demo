@@ -16,6 +16,7 @@ class AvatarService
     }
     public function update(Profile $user, $path) : void
     {
+        $this->delete($user->avatar()->first()->avatar_path);
         $user->avatar()->updateOrCreate(
             [],
             ['avatar_path' => $path]
