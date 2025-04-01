@@ -101,6 +101,9 @@
                                                                 <div class="form-group">
                                                                     <label class="form-label" for="current_passwd">Текущий пароль</label>
                                                                     <input class="form-control" type="password" name="current_passwd" id="current_passwd">
+                                                                    @if ($errors->has('current_passwd'))
+                                                                        <div class="text-danger">{{ $errors->first('current_passwd') }}</div>
+                                                                    @endif
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="password" class="form-label">Новый пароль</label>
@@ -109,6 +112,9 @@
                                                                 <div class="form-group">
                                                                     <label for="repeat_passwd" class="form-label">Повторите пароль</label>
                                                                     <input class="form-control" type="password" name="repeat_passwd" id="repeat_passwd">
+                                                                    @if ($errors->has('repeat_passwd'))
+                                                                        <div class="text-danger">{{ $errors->first('repeat_passwd') }}</div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>

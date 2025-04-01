@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Profile;
+use App\Rules\CurrentPassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
@@ -35,14 +36,14 @@ class ProfileService
             'password' => 'required|min:3',
         ]);
     }
-    public function validateUpdate($request) : Request
+    public function validateUpdate($request) : array
     {
         return $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'current_passwd' => 'required',
-            'repeat_passwd' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:3',
+            'current_passwd' => ['required', new CurrentPassword],
+            'repeat_passwd' => 'required|same:password',
             'phone' => 'required',
         ]);
     }
