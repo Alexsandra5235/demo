@@ -24,7 +24,7 @@ class ProductService
         return $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'price' => 'required',
+            'price' => 'required|integer',
         ]);
     }
 

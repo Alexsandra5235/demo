@@ -10,6 +10,10 @@
 
 @section('main_content')
 
+    <div class="container">
+        <h2>Товары России</h2>
+    </div>
+
     @if ($users->isNotEmpty())
         <div class="container">
             <form action="/search" method="get">
@@ -21,7 +25,7 @@
                         @endforeach
                     </select>
                     <input type="submit" class="btn btn-primary" value="Поиск по продавцу">
-                    <a href="/products" class="btn btn-secondary">Отчистить поиск</a>
+                    <a href="/" class="btn btn-secondary">Отчистить поиск</a>
                 </div>
             </form>
         </div>

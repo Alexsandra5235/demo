@@ -17,29 +17,31 @@
                     <div class="card-body p-5">
                         <h2 class="text-uppercase text-center mb-5">Добавление товара</h2>
 
-                        @if($errors->any())
-                            <div class="container alert alert-danger">
-                                <ul>
-                                    @foreach($errors->all() as $error)
-                                        <li>{{$error}}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
                         <form method="post" action="/product/add" enctype="multipart/form-data">
                             @csrf
+
                             <div data-mdb-input-init class="form-outline mb-4">
+                                @if ($errors->has('title'))
+                                    <div class="text-danger">{{ $errors->first('title') }}</div>
+                                @endif
                                 <input type="text" name="title" id="title" class="form-control" placeholder="Введите название товара"
                                     value="{{ old('title') }}"/>
                             </div>
 
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="text" name="description" id="description" class="form-control" placeholder="Введите описание товара"/>
+                                @if ($errors->has('description'))
+                                    <div class="text-danger">{{ $errors->first('description') }}</div>
+                                @endif
+                                <input type="text" name="description" id="description" class="form-control" placeholder="Введите описание товара"
+                                    value="{{old('description')}}"/>
                             </div>
 
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="text" name="price" id="price" class="form-control" placeholder="Введите цену товара"/>
+                                @if ($errors->has('price'))
+                                    <div class="text-danger">{{ $errors->first('price') }}</div>
+                                @endif
+                                <input type="text" name="price" id="price" class="form-control" placeholder="Введите цену товара"
+                                    value="{{old('price')}}"/>
                             </div>
 
                             <div data-mdb-input-init class="form-outline mb-4">
