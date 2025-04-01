@@ -22,33 +22,56 @@
                                     @csrf
 
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="text" id="name" name="name" class="form-control" />
+                                        @if ($errors->has('name'))
+                                            <div class="text-danger">{{ $errors->first('name') }}</div>
+                                        @endif
+                                        <input type="text" id="name" name="name" class="form-control"
+                                            value="{{old('name')}}"/>
                                         <label class="form-label" for="name">Ваше имя</label>
+
                                     </div>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="email" id="email" name="email" class="form-control" />
+                                        @if ($errors->has('email'))
+                                            <div class="text-danger">{{ $errors->first('email') }}</div>
+                                        @endif
+                                        <input type="text" id="email" name="email" class="form-control"
+                                            value="{{old('email')}}"/>
                                         <label class="form-label" for="email">Ваша почта</label>
+
                                     </div>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="text" id="phone" name="phone" class="form-control" />
+                                        @if ($errors->has('phone'))
+                                            <div class="text-danger">{{ $errors->first('phone') }}</div>
+                                        @endif
+                                        <input type="text" id="phone" name="phone" class="form-control"
+                                            value="{{old('phone')}}"/>
                                         <label class="form-label" for="phone">Ваш номер телефона</label>
+
                                     </div>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
+                                        @if ($errors->has('password'))
+                                            <div class="text-danger">{{ $errors->first('password') }}</div>
+                                        @endif
                                         <input type="password" id="password" name="password" class="form-control" />
                                         <label class="form-label" for="password">Пароль</label>
+
                                     </div>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="password" id="repeat_password" name="repeat_password" class="form-control" />
+                                        @if ($errors->has('repeat_password'))
+                                            <div class="text-danger">{{ $errors->first('repeat_password') }}</div>
+                                        @endif
+                                        <input type="password" id="repeat_password" name="repeat_password" class="form-control"/>
                                         <label class="form-label" for="repeat_password">Повторите пароль</label>
+
                                     </div>
 
 
                                     <div class="d-flex justify-content-center">
-                                        <input type="submit" class="btn btn-success btn-block btn-lg text-body" value="Готово">
+                                        <button type="submit" class="btn btn-success btn-block btn-lg text-body">Готово</button>
                                     </div>
 
                                 </form>

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Profile;
 use App\Rules\CurrentPassword;
+use App\Rules\UniqueEmail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,10 @@ class ProfileService
     {
         return $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'phone' => 'required',
+            'email' => ['required','email', new UniqueEmail],
+            'password' => 'required|min:3',
+            'phone' => 'required|integer',
+            'repeat_password' => 'required|same:password',
         ]);
     }
 
